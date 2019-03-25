@@ -9,6 +9,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { NavigationScreenProp, NavigationState } from "react-navigation";
 
 const instructions = Platform.select({
   ios: 'iOS Home!',
@@ -16,8 +17,12 @@ const instructions = Platform.select({
     'Android Home',
 });
 
-export default class ScanScreen extends Component {
-  static navigationOptions =  ({navigation}) => {
+type Props = {
+  navigation: NavigationScreenProp<NavigationState>,
+};
+
+export default class ScanScreen extends Component<Props> {
+  static navigationOptions =  ({navigation}: Props) => {
     return {title: '扫一扫'}
   }
   render() {
@@ -28,7 +33,7 @@ export default class ScanScreen extends Component {
             <Text style={{ textAlign: 'center' }}>ScanScreen!</Text>
           </View>
         </TouchableOpacity>
-        <Text style={styles.welcome}>Edit MeScreen.js</Text>
+        <Text>Edit MeScreen.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
         <Button title="Go Back!" onPress={() => this.props.navigation.goBack()} />
       </View>

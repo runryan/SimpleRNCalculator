@@ -8,6 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import { NavigationScreenProp, NavigationState  } from 'react-navigation';
 
 const instructions = Platform.select({
   ios: 'iOS Home!',
@@ -15,7 +16,10 @@ const instructions = Platform.select({
     'Android Home',
 });
 
-type Props = {};
+type Props = {
+  navigation: NavigationScreenProp
+};
+
 export default class MeScreen extends Component<Props> {
   static navigationOptions = {
     "title": '我',
@@ -23,7 +27,7 @@ export default class MeScreen extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>MeScreen !</Text>
+        <Text>MeScreen !</Text>
         <Text style={styles.instructions}>Edit MeScreen.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
         <Button title="Go Back!" onPress={() => this.props.navigation.goBack()} />

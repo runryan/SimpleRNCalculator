@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, Image, Icon} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, Image} from 'react-native';
 import {createStackNavigator, createAppContainer, createBottomTabNavigator} from "react-navigation";
 import HomeScreen from './src/pages/HomeScreen';
 import ContactsScreen from './src/pages/ContactsScreen';
@@ -15,6 +15,7 @@ import DiscoveryScreen from './src/pages/DiscoveryScreen';
 import MeScreen from './src/pages/MeScreen';
 import ChatScreen from './src/pages/ChatScreen';
 import ScanScreen from './src/pages/ScanScreen';
+import GameScreen from './src/pages/GameScreen'
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -23,7 +24,7 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-class App extends Component {
+class App extends Component<{}> {
     render() {
         return (
             <View style={styles.container}>
@@ -56,9 +57,21 @@ const HomeNavigator = createStackNavigator(
     }
 );
 
+HomeNavigator.navigationOptions = ({navigation}) => {
+    let tabBarVisible = false;
+    let routeName = navigation.state.routes[navigation.state.index].routeName
+    if (routeName == 'Home') {
+        tabBarVisible = true
+    }
+    console.log(tabBarVisible, ' ', routeName)
+    return {
+        tabBarVisible,
+    }
+};
+
 const ContactsNavigator = createStackNavigator(
     {
-        Contacts: ContactsScreen
+        Contacts: ContactsScreen,
     },
     {
         initialRouteName: "Contacts",
@@ -76,7 +89,8 @@ const ContactsNavigator = createStackNavigator(
 
 const DiscoveryNavigator = createStackNavigator(
     {
-        Discovery: DiscoveryScreen
+        Discovery: DiscoveryScreen,
+        Game: GameScreen,
     },
     {
         initialRouteName: "Discovery",
@@ -91,6 +105,18 @@ const DiscoveryNavigator = createStackNavigator(
         }
     }
 );
+
+DiscoveryNavigator.navigationOptions = ({navigation}) => {
+    let tabBarVisible = false;
+    let routeName = navigation.state.routes[navigation.state.index].routeName
+    if (routeName == 'Discovery') {
+        tabBarVisible = true
+    }
+    console.log(tabBarVisible, ' ', routeName)
+    return {
+        tabBarVisible,
+    }
+}
 
 const MeNavigator = createStackNavigator(
     {

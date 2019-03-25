@@ -15,19 +15,15 @@ const instructions = Platform.select({
   android: 'Android Home',
 });
 
-export default class DiscoveryScreen extends Component {
+type State = {
+  operators: Array<string>,
+}
+
+export default class DiscoveryScreen extends Component<{}, State> {
   static navigationOptions = {
     "title": '发现',
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      operators: [
-        'AC', '÷', '×', '←', '7', '8', '9', '-', '4', '5', '6', '+', '1', '2', '3', '=', '0', '.'
-      ]
-    };
-  }
+  state = { operators: ['AC', '÷', '×', '←', '7', '8', '9', '-', '4', '5', '6', '+', '1', '2', '3', '=', '0', '.' ]};
 
   render() {
     return (

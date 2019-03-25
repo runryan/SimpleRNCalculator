@@ -8,6 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import { NavigationScreenProp, NavigationState } from "react-navigation";
 
 const instructions = Platform.select({
   ios: 'iOS Home!',
@@ -15,9 +16,12 @@ const instructions = Platform.select({
     'Android Home',
 });
 
-type Props = {};
+type Props = {
+  navigation: NavigationScreenProp<NavigationState>,
+};
+
 export default class ChatScreen extends Component<Props> {
-  static navigationOptions =  ({navigation}) => {
+  static navigationOptions =  ({navigation}: Props) => {
     return {
       "title": navigation.getParam('toUser', '聊天'),
     }
@@ -26,7 +30,7 @@ export default class ChatScreen extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>ChatScreen!</Text>
+        <Text>ChatScreen!</Text>
         <Text style={styles.instructions}>Edit MeScreen.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
         <Button title="Go Back!" onPress={() => this.props.navigation.goBack()} />
